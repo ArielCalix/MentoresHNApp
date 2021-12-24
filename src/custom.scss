@@ -8,8 +8,46 @@ $success: #459053;
 $warning: #c3801b;
 $danger: #f44336;
 
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
+// Definicion de breakpoints
+$pantallas-xs: 576px;
+$pantallas-sm: 576px;
+$pantallas-md: 768px;
+$pantallas-lg: 992px;
+$pantallas-xl: 1200px;
+$pantallas-xxl: 1400px;
+
+@mixin xs {
+    @media (max-width: #{$pantallas-xs}) {
+        @content;
+    }
+}
+@mixin sm {
+    @media (min-width: #{$pantallas-sm}) {
+        @content;
+    }
+}
+@mixin md {
+    @media (min-width: #{$pantallas-md}) {
+        @content;
+    }
+}
+@mixin lg {
+    @media (min-width: #{$pantallas-lg}) {
+        @content;
+    }
+}
+@mixin xl {
+    @media (min-width: #{$pantallas-xl}) {
+        @content;
+    }
+}
+@mixin xxl {
+    @media (min-width: #{$pantallas-xxl}) {
+        @content;
+    }
+}
 
 // :root {
 //   /* Pallet Main Colors */
@@ -41,7 +79,7 @@ $danger: #f44336;
 //   --text-color-dark-transparent: var(--main-brand-transparent);
 // }
 
-// /* 
+// /*
 //  TABLA DE TRANSPARENCIAS HEX
 //  100% — FF	50% — 80
 //  95% — F2	45% — 73
@@ -53,5 +91,5 @@ $danger: #f44336;
 //  65% — A6	15% — 26
 //  60% — 99	10% — 1A
 //  55% — 8C	5% — 0D
-//  	        0% — 00 
+//  	        0% — 00
 //      */

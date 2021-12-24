@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './custom.scss';
-import Button from 'react-bootstrap/Button';
 import Nav from "react-bootstrap/Nav";
 import { Navbar, NavbarBrand } from 'react-bootstrap';
+import HomeVideoMeet from './components/meets/home';
+
 function App() {
   return (
     <div className="App">
@@ -18,9 +19,7 @@ function App() {
             </Nav.Link>
           </Navbar>
         </Nav>
-        <Button variant='primary'>
-          Hola Munfo
-        </Button>
+        <HomeVideoMeet />
       </header>
     </div>
   );
