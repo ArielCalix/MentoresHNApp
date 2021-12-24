@@ -44,6 +44,7 @@ function HomeVideoMeet(props) {
             });
         }
         a();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const connectedRef = db.database().ref(".info/connected");
@@ -77,6 +78,7 @@ function HomeVideoMeet(props) {
                 props.removeParticipant(snap.key);
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isStreamSet, isUserSet]);
     return (
         <div className={styles.app}>

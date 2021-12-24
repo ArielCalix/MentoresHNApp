@@ -48,9 +48,11 @@ const MeetingFooter = (props) => {
     };
     useEffect(() => {
         props.onMicClick(streamState.mic);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [streamState.mic]);
     useEffect(() => {
         props.onVideoClick(streamState.video);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [streamState.video]);
     return (
         <div className={styles.meetingFooter}>
