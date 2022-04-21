@@ -9,16 +9,20 @@ import { createStore } from 'redux';
 import { userReducer } from './store/meetsReducers/reducers';
 
 import { devToolsEnhancer } from 'redux-devtools-extension';
+import { ThemeProvider } from 'styled-components';
+import { Theme } from './Theme/Pallete';
 
 
-export const store = createStore(userReducer, devToolsEnhancer({name: "mentoresHN"}));
+export const store = createStore(userReducer, devToolsEnhancer({ name: "mentoresHN" }));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ThemeProvider theme={Theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
