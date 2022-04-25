@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const DefaultButton = styled.button`
   margin-left: 22px;
+  margin-bottom: 1em;
   background: ${props => props.theme.mainBrand};
   color: ${props => props.theme.textColor};
   border-radius: 50px;
@@ -10,10 +11,11 @@ export const DefaultButton = styled.button`
   transition: 0.3s;
   font-size: 14px;
   display: inline-block;
-  border: 1em;
+  border: 0em;
   &:hover {
     background: ${props => props.theme.textColor};
     color: ${props => props.theme.textColorDark};
+    border: 1px solid ${props => props.theme.textColorDark};
   }
 `
 
@@ -24,6 +26,7 @@ export const SuccessButton = styled(DefaultButton)`
   &:hover {
     background: ${props => props.theme.successTransparent};
     color: ${props => props.theme.success};
+    border: 1px solid ${props => props.theme.success};
   }
 `
 
@@ -34,6 +37,7 @@ export const DangerButton = styled(DefaultButton)`
   &:hover {
     background: ${props => props.theme.dangerTransparent};
     color: ${props => props.theme.danger};
+    border: 1px solid ${props => props.theme.danger};
   }
 `
 
@@ -44,5 +48,6 @@ export const WarningButton = styled(DefaultButton)`
   &:hover {
     background: ${props => props.theme.warningTransparent};
     color: ${props => props.theme.warning};
+    border: 1px solid ${props => props.theme.warning};
   }
 `

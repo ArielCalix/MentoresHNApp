@@ -26,4 +26,6 @@ export const Theme = {
     textColorTransparent: "#f7f6f780",
     textColorDark: "#364959",
     textColorDarkTransparent: "#36495980",
+    textColorAlternative: "#A6D6FF",
+    textColorAlternativeTransparent: "#A6D6FF80",
 }
