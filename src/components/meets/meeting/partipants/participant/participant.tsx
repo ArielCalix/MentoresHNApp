@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../../../shared/card/card";
+import Card from "../../../card/card";
 import { faMicrophoneSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../stylesParticipants.module.scss";
