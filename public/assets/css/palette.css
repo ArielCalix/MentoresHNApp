@@ -1,0 +1,44 @@
+:root {
+  /* Pallet Main Colors */
+  --light-shades: #f7f6f7;
+  --dark-accent: #735134;
+  --main-brand: #364959;
+  --light-accent: #d9b9a7;
+  --dark-shades: #593622;
+  --light-shades-transparent: #f7f6f780;
+  --dark-accent-transparent: #73513480;
+  --main-brand-transparent: #36495980;
+  --light-accent-transparent: #d9b9a780;
+  --dark-shades-transparent: #59362280;
+  /* Color Semantics */
+  --primary: var(--main-brand);
+  --info: var(--dark-shades);
+  --success: #459053;
+  --warning: #c3801b;
+  --danger: #f44336;
+  --primary-transparent: var(--main-brand-transparent);
+  --info-transparent: var(--dark-shades-transparent);
+  --success-transparent: #45905340;
+  --warning-transparent: #c3801b40;
+  --danger-transparent: #f4433640;
+  /* Colores de Texto */
+  --text-color: var(--light-shades);
+  --text-color-transparent: var(--light-shades-transparent);
+  --text-color-dark: var(--main-brand);
+  --text-color-dark-transparent: var(--main-brand-transparent);
+}
+
+/* 
+ TABLA DE TRANSPARENCIAS HEX
+ 100% — FF	50% — 80
+ 95% — F2	45% — 73
+ 90% — E6	40% — 66
+ 85% — D9	35% — 59
+ 80% — CC	30% — 4D
+ 75% — BF	25% — 40
+ 70% — B3	20% — 33
+ 65% — A6	15% — 26
+ 60% — 99	10% — 1A
+ 55% — 8C	5% — 0D
+ 	        0% — 00 
+     */
