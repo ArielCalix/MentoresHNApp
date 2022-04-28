@@ -20,7 +20,7 @@ if (roomId) {
     fireDbRef = fireDbRef.child(roomId);
 } else {
     fireDbRef = fireDbRef.push();
-    window.history.replaceState(null, "Meet", "?id=" + fireDbRef.key);
+    window.history.replaceState(null, "", "meet?id=" + fireDbRef.key);
 }
 
 export default fireDbRef;

@@ -3,11 +3,13 @@ export const Theme = {
     lightShades: "#f7f6f7",
     darkAccent: "#735134",
     mainBrand: "#364959",
+    mainBrandAlternative: "#A6D6FF",
     lightAccent: "#d9b9a7",
     darkShades: "#593622",
     lightShadesTransparent: "#f7f6f780",
     darkAccentTransparent: "#73513480",
     mainBrandTransparent: "#36495980",
+    mainBrandAlternativeTransparent: "#A6D6FF80",
     lightAccentTransparent: "#d9b9a780",
     darkShadesTransparent: "#59362280",
     /* Color Semantics */
