@@ -1,6 +1,6 @@
 import React from 'react';
-import { CourseDetails, CourseInfo } from '../../Components/Courses/CoursesInfo/CourseInfo';
-import { CourseDetailsTab } from '../../Components/Courses/CoursesInfo/CourseDetailsTab';
+import { CourseDetails, CourseInfo } from '../../components/Courses/CoursesInfo/CourseInfo';
+import { CourseDetailsTab } from '../../components/Courses/CoursesInfo/CourseDetailsTab';
 import detail from '../../assets/img/course-details.jpg'
 import tab1 from '../../assets/img/course-details-tab-1.png'
 import tab2 from '../../assets/img/course-details-tab-2.png'
