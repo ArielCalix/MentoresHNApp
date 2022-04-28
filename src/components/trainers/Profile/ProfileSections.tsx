@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import bg from "../../../assets/img/hero-bg.jpg";
 import About from "./Sections/About";
 import Coments from "./Sections/Coments";
 import Contact from "./Sections/Contact";
@@ -50,7 +49,6 @@ margin-left: 300px;
 const HeaderSection = styled.section`
 width: 100%;
 height: 100vh;
-background: url(${bg}) top center;
 background-size: cover;
 &::before {
     content: "";
@@ -88,23 +86,26 @@ p {
     }
 }`
 
-export const ProfileSections = () => {
+export const ProfileSections = ({ TrainerName, TrainerSkills, TrainerImageBackGround, TrainerId, ProfileSectionsData }) => {
+    const style = {
+        background: `url(${TrainerImageBackGround}) top center`
+    };
     return <React.Fragment>
-        <HeaderSection className="d-flex flex-column justify-content-center align-items-center">
+        <HeaderSection style={style} className="d-flex flex-column justify-content-center align-items-center">
             <HeaderContainer data-aos="fade-in">
-                <Header1>Alex Smith</Header1>
-                <p>I'm <span className="typed" data-typed-items="Designer, Developer, Freelancer, Photographer"></span></p>
+                <Header1>{TrainerName}</Header1>
+                <p>Soy <span className="typed" data-typed-items={TrainerSkills}></span></p>
             </HeaderContainer>
         </HeaderSection>
 
         <Main id="main">
-            <About></About>
-            <Facts></Facts>
-            <Skills></Skills>
-            <Resume></Resume>
-            <Services></Services>
-            <Coments></Coments>
-            <Contact></Contact>
+            {(ProfileSectionsData[0].isEnabled) ? <About TrainerId={TrainerId} /> : <></>}
+            {(ProfileSectionsData[1].isEnabled) ? <Resume TrainerId={TrainerId} TrainerName={TrainerName} /> : <></>}
+            {(ProfileSectionsData[2].isEnabled) ? <Skills TrainerId={TrainerId} /> : <></>}
+            {(ProfileSectionsData[3].isEnabled) ? <Services TrainerId={TrainerId} /> : <></>}
+            {(ProfileSectionsData[4].isEnabled) ? <Facts TrainerId={TrainerId} /> : <></>}
+            {(ProfileSectionsData[5].isEnabled) ? <Coments /> : <></>}
+            {(ProfileSectionsData[6].isEnabled) ? <Contact TrainerId={TrainerId} /> : <></>}
         </Main>
     </React.Fragment>
 }

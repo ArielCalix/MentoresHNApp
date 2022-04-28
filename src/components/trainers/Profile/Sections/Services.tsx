@@ -1,5 +1,41 @@
 import styled from "styled-components"
 
+const ServicesContent = {
+    ServicesDescription: "Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.Quisquam quos quisquam cupiditate.Et nemo qui impedit suscipit alias ea.Quia fugiat sit in iste officiis commodi quidem hic quas.",
+    Services: [
+        {
+            Title: "Lorem Ipsum",
+            Description: "Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident",
+            Icon: "bi-briefcase"
+        },
+        {
+            Title: "Dolor Sitema",
+            Description: "Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata",
+            Icon: "bi-card-checklist"
+        },
+        {
+            Title: "Sed ut perspiciatis",
+            Description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pdata- ariatur",
+            Icon: "bi-bar-chart"
+        },
+        {
+            Title: "Magni Dolores",
+            Description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+            Icon: "bi-binoculars"
+        },
+        {
+            Title: "Nemo Enim",
+            Description: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque",
+            Icon: "bi-brightness-high"
+        },
+        {
+            Title: "Eiusmod Tempor",
+            Description: "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi",
+            Icon: "bi-calendar4-week"
+        }
+    ]
+}
+
 const Content = styled.div``
 const ServicesSection = styled.section`
 &.icon-box {
@@ -49,56 +85,24 @@ ${Content} {
 }
 `
 
-export default function Services() {
+export default function Services({ TrainerId }) {
+    const services = ServicesContent.Services.map((service, index) => {
+        return <Content key={index} className="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
+            <div className="icon"><i className={`bi ${service.Icon}`}></i></div>
+            <h4 className="title"><a href="https://www.google.com">{service.Title}</a></h4>
+            <p className="description">{service.Description}</p>
+        </Content>
+    })
     return <ServicesSection id="services" className="section">
         <div className="container">
 
             <div className="header-section">
-                <h2>Services</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
-                    in iste officiis commodi quidem hic quas.</p>
+                <h2>Servicios</h2>
+                <p>{ServicesContent.ServicesDescription}</p>
             </div>
-
             <div className="body-section row">
-                <Content className="col-lg-4 col-md-6 icon-box" data-aos="fade-up">
-                    <div className="icon"><i className="bi bi-briefcase"></i></div>
-                    <h4 className="title"><a href="https://www.google.com">Lorem Ipsum</a></h4>
-                    <p className="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
-                        occaecati cupiditate non provident</p>
-                </Content>
-                <Content className="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
-                    <div className="icon"><i className="bi bi-card-checklist"></i></div>
-                    <h4 className="title"><a href="https://www.google.com">Dolor Sitema</a></h4>
-                    <p className="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat tarad limino ata</p>
-                </Content>
-                <Content className="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
-                    <div className="icon"><i className="bi bi-bar-chart"></i></div>
-                    <h4 className="title"><a href="https://www.google.com">Sed ut perspiciatis</a></h4>
-                    <p className="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pdata-ariatur</p>
-                </Content>
-                <Content className="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
-                    <div className="icon"><i className="bi bi-binoculars"></i></div>
-                    <h4 className="title"><a href="https://www.google.com">Magni Dolores</a></h4>
-                    <p className="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        mollit anim id est laborum</p>
-                </Content>
-                <Content className="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
-                    <div className="icon"><i className="bi bi-brightness-high"></i></div>
-                    <h4 className="title"><a href="https://www.google.com">Nemo Enim</a></h4>
-                    <p className="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
-                        voluptatum deleniti atque</p>
-                </Content>
-                <Content className="col-lg-4 col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
-                    <div className="icon"><i className="bi bi-calendar4-week"></i></div>
-                    <h4 className="title"><a href="https://www.google.com">Eiusmod Tempor</a></h4>
-                    <p className="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum
-                        soluta nobis est eligendi</p>
-                </Content>
+                {services}
             </div>
-
         </div>
     </ServicesSection>
 }

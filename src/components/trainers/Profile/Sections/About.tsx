@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-import bg from "../../../../assets/img/hero-bg.jpg";
+
+const AboutContent = { "About": "Provident et velit porro eligendi vel molestiae culpa sint rerum. Et magni illo qui aspernatur laboriosam quia eum dolores nisi. Sunt temporibus sit occaecati corporis non doloribus at sequi possimus. Et explicabo cupiditate quam iusto. Id odit magni est hic dolor asperiores qui quia.", "JobTitle": "Dynamic Accounts Supervisor", "JobTitleDesription": "Central", "BirthDate": "28/10/1991", "WebSite": "https://fiona.name", "City": "East Damarisbury", "Age": 29627, "Degree": "Accountability", "Status": true, "JobDescription": "Odit amet at reiciendis recusandae deleniti dolorum saepe eum dolor. Nulla itaque ea corporis modi saepe itaque quidem. Nisi possimus in unde sequi labore magnam et provident et. Maxime provident suscipit dicta rerum ex qui molestias eos quo. Natus minima qui omnis unde.", "ImageProfileBackground": "http://placeimg.com/640/480/city", "id": "1", "TrainersProfileId": "1" }
 
 const Content = styled.div``
 
@@ -38,51 +39,39 @@ ${Content} {
 }
 `
 
-export default function About() {
+export default function About({ TrainerId }) {
     return <AboutSection id="about" className="section">
         <div className="container">
             <div className="header-section">
-                <h2>About</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
-                    in iste officiis commodi quidem hic quas.</p>
+                <h2>Sobre mí</h2>
+                <p>{AboutContent.About}</p>
             </div>
 
             <div className="body-section row">
                 <div className="col-lg-4" data-aos="fade-right">
-                    <img src={bg} className="img-fluid" alt="" />
+                    <img src={AboutContent.ImageProfileBackground} className="img-fluid" alt="" />
                 </div>
                 <Content id="about" className="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-                    <h3>UI/UX Designer &amp; Web Developer.</h3>
-                    <p className="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore
-                        magna aliqua.
-                    </p>
+                    <h3>{AboutContent.JobTitle}</h3>
+                    <p className="fst-italic">{AboutContent.JobDescription}</p>
                     <div className="row">
                         <div className="col-lg-6">
                             <ul>
-                                <li><i className="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
-                                <li><i className="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li>
-                                <li><i className="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
-                                <li><i className="bi bi-chevron-right"></i> <strong>City:</strong> <span>New York, USA</span></li>
+                                <li><i className="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>{AboutContent.BirthDate}</span></li>
+                                <li><i className="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{AboutContent.WebSite}</span></li>
+                                <li><i className="bi bi-chevron-right"></i> <strong>City:</strong> <span>{AboutContent.City}</span></li>
                             </ul>
                         </div>
                         <div className="col-lg-6">
                             <ul>
-                                <li><i className="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                                <li><i className="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Master</span></li>
-                                <li><i className="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span>
-                                </li>
-                                <li><i className="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                                <li><i className="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{AboutContent.Age}</span></li>
+                                <li><i className="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{AboutContent.Degree}</span></li>
+                                <li><i className="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>{AboutContent.Status}</span></li>
                             </ul>
                         </div>
                     </div>
                     <p>
-                        Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et
-                        ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
-                        Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus itaque neque.
-                        Aliquid amet quidem ut quaerat cupiditate. Ab et eum qui repellendus omnis culpa magni laudantium dolores.
+                        {AboutContent.JobDescription}
                     </p>
                 </Content>
             </div>

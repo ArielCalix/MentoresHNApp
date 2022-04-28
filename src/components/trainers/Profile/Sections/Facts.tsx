@@ -1,5 +1,30 @@
 import React from "react";
 import styled from 'styled-components';
+import PureCounter from '@srexi/purecounterjs'
+import { useEffect } from "react";
+new PureCounter()
+
+const FactsContents = {
+    FactsDescription: "Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.Quisquam quos quisquam cupiditate.Et nemo qui impedit suscipit alias ea.Quia fugiat sit in iste officiis commodi quidem hic quas.",
+    Facts: [
+        {
+            FactsTitle: "Alumnos Satisfechos",
+            FactsDescription: "por clase",
+            FactsValue: "400"
+        },
+        {
+            FactsTitle: "Clases impartidas",
+            FactsDescription: "por materia",
+            FactsValue: "45"
+        },
+        {
+            FactsTitle: "Horas clase",
+            FactsDescription: "impartidas",
+            FactsValue: "200"
+        },
+    ]
+
+}
 
 const Content = styled.div``
 const CountBox = styled.div``
@@ -49,55 +74,30 @@ ${Content} {
 }
 `
 
-export default function Facts() {
+export default function Facts({ TrainerId }) {
+    useEffect(() => {
+        new PureCounter();
+    })
+    const facts = FactsContents.Facts.map((fact, index) => {
+        return <div key={index} className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
+            <CountBox>
+                <i className="bi bi-emoji-smile"></i>
+                <span data-purecounter-start="0" data-purecounter-end={fact.FactsValue}
+                    className="purecounter"></span>
+                <p><strong>{fact.FactsTitle}</strong> {fact.FactsDescription}</p>
+            </CountBox>
+        </div>
+    });
     return <FactsSection id="facts" className="section section-bg">
         <div className="container">
 
             <div className="header-section">
-                <h2>Facts</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
-                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
-                    in iste officiis commodi quidem hic quas.</p>
+                <h2>Logros</h2>
+                <p>{FactsContents.FactsDescription}</p>
             </div>
 
             <Content className="body-section row no-gutters">
-                <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
-                    <CountBox>
-                        <i className="bi bi-emoji-smile"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="232"
-                            className="purecounter"></span>
-                        <p><strong>Happy Clients</strong> consequuntur quae</p>
-                    </CountBox>
-                </div>
-
-                <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
-                    <CountBox className="count-box">
-                        <i className="bi bi-journal-richtext"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="521"
-                            className="purecounter"></span>
-                        <p><strong>Projects</strong> adipisci atque cum quia aut</p>
-                    </CountBox>
-                </div>
-
-                <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <CountBox className="count-box">
-                        <i className="bi bi-headset"></i>
-                        <span data-purecounter-start="0" data-purecounter-end="1453"
-                            className="purecounter"></span>
-                        <p><strong>Hours Of Support</strong> aut commodi quaerat</p>
-                    </CountBox>
-                </div>
-
-                <div className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="300">
-                    <CountBox className="count-box">
-                        <i className="bi bi-people"></i>
-                        <span className="purecounter" data-purecounter-start="0"
-                            data-purecounter-end="950"
-                        ></span>
-                        <p><strong>Hard Workers</strong> rerum asperiores dolor</p>
-                    </CountBox>
-                </div>
-
+                {facts}
             </Content>
 
         </div>
