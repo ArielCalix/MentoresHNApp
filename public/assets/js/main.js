@@ -193,7 +193,7 @@
     /**
      * Skills animation
      */
-    let skilsContent = select('.skills-content');
+    let skilsContent = select('.body-section');
     if (skilsContent) {
       new Waypoint({
         element: skilsContent,
