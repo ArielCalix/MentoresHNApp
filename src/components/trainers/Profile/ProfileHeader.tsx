@@ -111,7 +111,8 @@ const ProfileNavigation = ({ Sections }) => {
     </Navigation>
 }
 
-export const ProfileHeader = ({ TrainerData }) => {
+export const ProfileHeader = (props) => {
+    const { TrainerData } = props;
     const anchors = TrainerData.TrainerSocials.map((social, index) => {
         return <Anchor key={index} href={social.url}>
             <i className={`bx bxl-${social.name}`}></i>

@@ -86,7 +86,8 @@ p {
     }
 }`
 
-export const ProfileSections = ({ TrainerName, TrainerSkills, TrainerImageBackGround, TrainerId, ProfileSectionsData }) => {
+export const ProfileSections = (props) => {
+    const { TrainerName, TrainerSkills, TrainerImageBackGround, TrainerId, ProfileSectionsData } = props;
     const style = {
         background: `url(${TrainerImageBackGround}) top center`
     };
