@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileHeader } from '../components/Trainers/Profile/ProfileHeader';
+
 import { ProfileSections } from '../components/Trainers/Profile/ProfileSections';
 
 
@@ -7,7 +7,6 @@ const TrainerData = { "TrainerName": "Kendra.Adams32", "TrainerPicture": "http:/
 
 export default function TrainerProfilePage() {
     return <React.Fragment>
-        <ProfileHeader TrainerData={TrainerData}/>
         <ProfileSections TrainerImageBackGround={TrainerData.TrainerImage} TrainerName={TrainerData.TrainerName} TrainerSkills={TrainerData.TrainerSkills} TrainerId={TrainerData.TrainerId} ProfileSectionsData={TrainerData.Sections} />
     </React.Fragment>
 
