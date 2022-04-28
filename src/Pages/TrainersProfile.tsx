@@ -7,7 +7,7 @@ const TrainerData = { "TrainerName": "Kendra.Adams32", "TrainerPicture": "http:/
 
 export default function TrainerProfilePage() {
     return <React.Fragment>
-        <ProfileHeader TrainerData={TrainerData} />
+        <ProfileHeader TrainerData={TrainerData}/>
         <ProfileSections TrainerImageBackGround={TrainerData.TrainerImage} TrainerName={TrainerData.TrainerName} TrainerSkills={TrainerData.TrainerSkills} TrainerId={TrainerData.TrainerId} ProfileSectionsData={TrainerData.Sections} />
     </React.Fragment>
 

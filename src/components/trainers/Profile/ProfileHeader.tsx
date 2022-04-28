@@ -22,8 +22,8 @@ const Profile = styled.div`
 ${Photo} {
     margin: 15px auto;
     display: block;
-    width: 120px;
     height: 120px;
+    width: 120px;
     border: 2px solid ${props => props.theme.darkShades};
 }
 ${Header1} {
