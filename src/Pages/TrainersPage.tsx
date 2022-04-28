@@ -1,6 +1,6 @@
 import React from 'react';
-import { SocialContainer, SocialIcons, SocialLink } from '../components/Trainers/SocialContainer/SocialElements';
-import { MemberBio, MemberContent, MemberTitle, MemberName, MemberContainer, MemberPhoto, MemberBioLink } from '../components/Trainers/TrainersInfo/TrainerInfo';
+import { SocialContainer, SocialIcons, SocialLink } from '../Components/Trainers/SocialContainer/SocialElements';
+import { MemberBio, MemberContent, MemberTitle, MemberName, MemberContainer, MemberPhoto, MemberBioLink } from '../Components/Trainers/TrainersInfo/TrainerInfo';
 import logo from '../logo.svg';
 
 //TODO: Para cada Entrenador, crear un Container.

@@ -1,6 +1,6 @@
 import React from 'react';
-import { CourseCategoryPrice, CourseContainer, CourseContent, CourseTitleDescription } from '../components/Courses/Course/Courses';
-import { TrainerContainer, TrainerProfile, TrainerRank } from '../components/Courses/CoursesTrainers/CourseTrainers';
+import { CourseCategoryPrice, CourseContainer, CourseContent, CourseTitleDescription } from '../Components/Courses/Course/Courses';
+import { TrainerContainer, TrainerProfile, TrainerRank } from '../Components/Courses/CoursesTrainers/CourseTrainers';
 import trainer from '../assets/img/trainers/trainer-1.jpg';
 import picture from '../assets/img/course-1.jpg';
 
