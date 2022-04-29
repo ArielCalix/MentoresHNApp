@@ -53,7 +53,7 @@ const HeaderSection = styled.section`
 width: 100%;
 height: 100vh;
 background-size: cover;
-&::before {
+&:before {
     content: "";
     background: ${props => props.theme.mainBrandTransparent};
     position: absolute;
@@ -75,6 +75,13 @@ ${Header1} {
     font-weight: 700;
     line-height: 56px;
     color: ${props => props.theme.textColor};
+    @media (min-width: 1024px) {
+        background-attachment: fixed;
+    }
+    @media (max-width: 768px) {
+        font-size: 28px;
+        line-height: 36px;
+    }
 }
 p {
     color: ${props => props.theme.textColor};
@@ -88,16 +95,30 @@ p {
         border-bottom: 3px solid ${props => props.theme.lightAccent};
     }
     
-}`
+}
+&.hero-container {
+    position: relative;
+    z-index: 2;
+    min-width: 300px;
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 30px;
+        }
+    }
+}
+`
 
 export const ProfileSections = (props) => {
     const { TrainerName, TrainerSkills, TrainerImageBackGround, TrainerId, ProfileSectionsData } = props;
     const style = {
-        background: `url(${TrainerImageBackGround}) top center`
+        background: `url(${TrainerImageBackGround}) top center`,
+        backgroundSize: 'cover'
     };
     return <React.Fragment>
-        <HeaderSection style={style} className="d-flex flex-column justify-content-center align-items-center">
-            <HeaderContainer data-aos="fade-in">
+        <HeaderSection style={style} className="d-flex flex-column justify-content-center align-items-center hero">
+            <HeaderContainer className="hero-container" data-aos="fade-in">
                 <Header1>{TrainerName}</Header1>
                 <p>Soy <span className="typed" data-typed-items={TrainerSkills}></span></p>
             </HeaderContainer>
