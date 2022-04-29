@@ -117,7 +117,7 @@ export const ProfileSections = (props) => {
         backgroundSize: 'cover'
     };
     return <React.Fragment>
-        <HeaderSection style={style} className="d-flex flex-column justify-content-center align-items-center hero">
+        <HeaderSection id="hero" style={style} className="d-flex flex-column justify-content-center align-items-center">
             <HeaderContainer className="hero-container" data-aos="fade-in">
                 <Header1>{TrainerName}</Header1>
                 <p>Soy <span className="typed" data-typed-items={TrainerSkills}></span></p>
