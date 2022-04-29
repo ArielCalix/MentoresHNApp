@@ -5,7 +5,7 @@ const Contenedor = styled.div`
 color: gray;
 .mobile-nav-toggle {
   position: fixed;
-  right: 15%;
+  right: 10%;
   top: 15px;
   z-index: 9998;
   border: 0;
