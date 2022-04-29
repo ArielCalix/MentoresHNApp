@@ -23,7 +23,7 @@ margin-left: 300px;
             padding-bottom: 20px;
             position: relative;
             color: ${props => props.theme.textColorDark};
-            &::after {
+            &:after {
                 content: "";
                 position: absolute;
                 display: block;
@@ -61,7 +61,6 @@ background-size: cover;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
 }
 `
 
@@ -96,16 +95,11 @@ p {
     }
     
 }
-&.hero-container {
-    position: relative;
-    z-index: 2;
-    min-width: 300px;
-    @media (max-width: 768px) {
-        h2 {
-            font-size: 18px;
-            line-height: 24px;
-            margin-bottom: 30px;
-        }
+@media (max-width: 768px) {
+    h2 {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 30px;
     }
 }
 `
@@ -117,7 +111,7 @@ export const ProfileSections = (props) => {
         backgroundSize: 'cover'
     };
     return <React.Fragment>
-        <HeaderSection id="hero" style={style} className="d-flex flex-column justify-content-center align-items-center">
+        <HeaderSection style={style} className="d-flex flex-column justify-content-center align-items-center">
             <HeaderContainer className="hero-container" data-aos="fade-in">
                 <Header1>{TrainerName}</Header1>
                 <p>Soy <span className="typed" data-typed-items={TrainerSkills}></span></p>
