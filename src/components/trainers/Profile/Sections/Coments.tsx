@@ -52,6 +52,7 @@ const ComentsSection = styled.section`
     min-height: 320px;
     .coments-img {
         width: 90px;
+        height: 90px;
         border-radius: 50%;
         margin: 0 auto;
     }

@@ -45,6 +45,9 @@ margin-left: 300px;
         margin-top: 1em; 
     }
 }
+@media (max-width: 1199px) {
+    margin-left: 0;
+}
 `
 const HeaderSection = styled.section`
 width: 100%;
@@ -84,6 +87,7 @@ p {
         letter-spacing: 1px;
         border-bottom: 3px solid ${props => props.theme.lightAccent};
     }
+    
 }`
 
 export const ProfileSections = (props) => {

@@ -86,6 +86,12 @@
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
   })
+  on('click', '.mobile-nav-toggle', function (e) {
+    select('#navbar').classList.toggle('mobile-nav-active')
+    debugger
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
 
   /**
    * Mobile nav dropdowns activate
@@ -136,7 +142,7 @@
     if (select(this.hash)) {
       e.preventDefault()
 
-      let body = select('body')
+      let body = select('.App')
       if (body.classList.contains('mobile-nav-active')) {
         body.classList.remove('mobile-nav-active')
         let navbarToggle = select('.mobile-nav-toggle')

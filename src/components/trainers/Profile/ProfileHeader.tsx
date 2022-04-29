@@ -1,10 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const Contenedor = styled.header`
+const Contenedor = styled.div`
+color: gray;
+.mobile-nav-toggle {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  z-index: 9998;
+  border: 0;
+  font-size: 24px;
+  transition: all 0.4s;
+  outline: none !important;
+  background-color: var(--main-brand);
+  color: var(--text-color);
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.mobile-nav-active {
+  overflow: hidden;
+}
+.mobile-nav-active #header {
+  left: 0;
+}
+`
+
+const Header = styled.header`
 position: fixed;
 top: 0;
-left: 0;
 bottom: 0;
 width: 300px;
 transition: all ease-in-out 0.5s;
@@ -12,6 +42,12 @@ z-index: 9997;
 transition: all 0.5s;
 padding: 0 15px;
 background: ${props => props.theme.mainBrand};
+@media(max-width: 1199px) {
+    left: -300px;
+    &.show {
+        left: 0px;
+    }
+}
 overflow-y: auto;
 `
 const Photo = styled.img``
@@ -112,22 +148,35 @@ const ProfileNavigation = ({ Sections }) => {
 }
 
 export const ProfileHeader = (props) => {
+    const [mobileToggleState, setMobileToggleState] = useState('');
     const { TrainerData } = props;
     const anchors = TrainerData.TrainerSocials.map((social, index) => {
         return <Anchor key={index} href={social.url}>
             <i className={`bx bxl-${social.name}`}></i>
         </Anchor>
     })
+    const updateStateToggle = () => {
+        console.log(mobileToggleState)
+        if (mobileToggleState === '') {
+            setMobileToggleState('show');
+        } else {
+            setMobileToggleState('');
+        }
+    }
     return <Contenedor>
-        <div className="d-flex flex-column">
-            <Profile className="profile">
-                <Photo src={TrainerData.TrainerPicture} alt={TrainerData.TrainerName} className="img-fluid rounded-circle" />
-                <Header1 className="text-light"><a href="index.html">{TrainerData.TrainerName}</a></Header1>
-                <SocialLinks className="social-links mt-3 text-center">
-                    {anchors}
-                </SocialLinks>
-            </Profile>
-            <ProfileNavigation Sections={TrainerData.Sections}></ProfileNavigation>
-        </div>
+
+        <i onClick={updateStateToggle} className="bi bi-list mobile-nav-toggle d-xl-none"></i>
+        <Header id="header" className={mobileToggleState}>
+            <div className="d-flex flex-column">
+                <Profile className="profile">
+                    <Photo src={TrainerData.TrainerPicture} alt={TrainerData.TrainerName} className="img-fluid rounded-circle" />
+                    <Header1 className="text-light"><a href="index.html">{TrainerData.TrainerName}</a></Header1>
+                    <SocialLinks className="social-links mt-3 text-center">
+                        {anchors}
+                    </SocialLinks>
+                </Profile>
+                <ProfileNavigation Sections={TrainerData.Sections}></ProfileNavigation>
+            </div>
+        </Header>
     </Contenedor>
 }
