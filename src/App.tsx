@@ -7,9 +7,8 @@ import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/shared/header/Header'
 import TrainerProfilePage from './Pages/TrainersProfile';
 import Navigation from './components/shared/navbar/NavBar';
-import { HomeMeet } from './components/meets/homeMeets';
 // import CoursesPage from './Pages/CoursesPage';
-// import HomeVideoMeet from './components/meets/home';
+import HomeVideoMeet from './components/meets/home';
 
 
 function App() {
@@ -34,7 +33,7 @@ function App() {
       */}
       </Header>
       <Routes>
-        <Route path="/" element={<HomeMeet></HomeMeet>}>
+        <Route path="/" element={<HomeVideoMeet></HomeVideoMeet>}>
         </Route>
         <Route path="TrainersProfile" element={<TrainerProfilePage></TrainerProfilePage>}>
         </Route>
