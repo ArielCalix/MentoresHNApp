@@ -1,7 +1,7 @@
-import firepadRef from "./firebase";
+import fireDbRef from "./firebase";
 import { store } from "../index";
 
-const participantRef = firepadRef.child("participants");
+const participantRef = fireDbRef.child("participants");
 
 export const updatePreference = (userId, preference) => {
     const currentParticipantRef = participantRef
