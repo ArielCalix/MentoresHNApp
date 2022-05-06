@@ -1,8 +1,8 @@
 import React from 'react';
 import { CourseCategoryPrice, CourseContainer, CourseContent, CourseTitleDescription } from '../components/courses/Course/Courses';
 import { TrainerContainer, TrainerProfile, TrainerRank } from '../components/courses/CoursesTrainers/CourseTrainers';
-import trainer from '../assets/img/trainers/trainer-1.jpg';
-import picture from '../assets/img/course-1.jpg';
+const trainer = 'http://placeimg.com/640/480/people';
+const picture = 'http://placeimg.com/640/480/people';
 
 //TODO: Para cada Curso, crear un Container.
 
