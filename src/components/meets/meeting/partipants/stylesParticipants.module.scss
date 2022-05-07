@@ -1,7 +1,7 @@
 .participants {
   grid-template-columns: repeat(var(--grid-size), 1fr);
   grid-gap: 20px;
-  height: 85vh;
+  height: 80vh;
   padding: 10px;
 
   img {
@@ -38,7 +38,7 @@
     right: 10px;
     position: absolute;
     top: 10px;
-    background: #353b48;
+    background: red;
     border-radius: 50%;
     height: 22px;
     width: 22px !important;

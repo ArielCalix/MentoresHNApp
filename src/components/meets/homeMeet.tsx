@@ -10,11 +10,12 @@ import { connect } from 'react-redux'
 import fireDbRef, { db } from '../../config/firebase';
 // import HomeVideoMeet from './homeVideoMeet';
 import MainScreen from "./meeting/mainScreen";
+import { SuccessButton } from '../shared/buttons/Button';
 let fireDb = fireDbRef;
 let participantRef;
 
 function HomeMeet(props) {
-    
+
     const [isUserSet, setIsUserSet] = useState(false);
     const [userName, setUserName] = useState("")
     const [roomId, setRoomId] = useState("")
@@ -64,7 +65,6 @@ function HomeMeet(props) {
                 userStatusRef.onDisconnect().remove();
             }
         });
-        // participantRefer = participantRef;
         setIsUserSet(true)
     }
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -105,11 +105,19 @@ function HomeMeet(props) {
     }, [isStreamSet, isUserSet]);
     return <>
         {isUserSet && <MainScreen />}
-        {!isUserSet && <>
-            <input onChange={setName} value={userName} type="text" />
-            <input onChange={setRoom} value={roomId} type="text" />
-            <button onClick={setUserNameToState} type="button">Set Name</button>
-        </>
+        {!isUserSet && <div className="container mt-4">
+            <div className='d-flex flex-column'>
+                <div className='mb-3'>
+                    <label className='form-label' data-for='userName'>Ingrese Su Nombre</label>
+                    <input id='userName' className='form-control' onChange={setName} value={userName} type="text" />
+                </div>
+                <div className='mb-3'>
+                    <label className='form-label' data-for='roomId'>Ingrese el id de la meet</label>
+                    <input id='roomId' className='form-control' onChange={setRoom} value={roomId} type="text" />
+                </div>
+                <SuccessButton className='mt-' onClick={setUserNameToState} type="button">Ingresar</SuccessButton>
+            </div>
+        </div>
         }
     </>
 }
