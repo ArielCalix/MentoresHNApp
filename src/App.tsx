@@ -8,7 +8,7 @@ import { Header } from './components/shared/header/Header'
 import TrainerProfilePage from './Pages/TrainersProfile';
 import Navigation from './components/shared/navbar/NavBar';
 // import CoursesPage from './Pages/CoursesPage';
-import HomeVideoMeet from './components/meets/home';
+import HomeMeet from './components/meets/homeMeet';
 
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
       */}
       </Header>
       <Routes>
-        <Route path="/" element={<HomeVideoMeet></HomeVideoMeet>}>
+        <Route path="/" element={<HomeMeet></HomeMeet>}>
         </Route>
         <Route path="TrainersProfile" element={<TrainerProfilePage></TrainerProfilePage>}>
         </Route>
