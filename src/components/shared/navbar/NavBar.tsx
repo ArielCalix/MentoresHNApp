@@ -61,10 +61,13 @@ export default function Navigation() {
         <NavBar className="navbar order-last order-lg-0">
             <UnorderedList>
                 <ListItem>
-                    <LinkItem to="/">Meet</LinkItem>
+                    <LinkItem to="/">Inicio</LinkItem>
                 </ListItem>
                 <ListItem>
-                    <LinkItem to="/TrainersProfile">Trainer Profile</LinkItem>
+                    <LinkItem to="/Meet">Reunirse</LinkItem>
+                </ListItem>
+                <ListItem>
+                    <LinkItem to="/TrainersProfile">Perfil de Entrenador</LinkItem>
                 </ListItem>
             </UnorderedList>
         </NavBar>

@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import styles from "./stylesParticipants.module.scss";
 import { connect } from "react-redux";
 import { Participant } from "./participant/participant";
+import styled from "styled-components";
+
+const ParticipantsContainer = styled.div`
+grid-gap: 20px;
+height: 80vh;
+padding: 10px;
+`
 
 const Participants = (props) => {
     const videoRef = useRef(null);
@@ -16,7 +22,7 @@ const Participants = (props) => {
     const currentUser = props.currentUser
         ? Object.values(props.currentUser)[0]
         : null;
-
+    let colSize = (participantKey.length === 1) ? "col-12" : (participantKey.length <= 4) ? "col-6" : "col-3"
     // let gridCol =
     //     participantKey.length === 1 ? 1 : participantKey.length <= 4 ? 2 : 4;
     // const gridColSize = participantKey.length <= 4 ? 1 : 2;
@@ -29,15 +35,14 @@ const Participants = (props) => {
         const currentParticipant = props.participants[element];
         return currentParticipant.screen;
     });
-
+    colSize = screenPresenter ? "col-12" : colSize
     // if (screenPresenter) {
     //     gridCol = 1;
     //     gridRowSize = 2;
     // }
     const participants = participantKey.map((element, index) => {
         const currentParticipant = props.participants[element];
-        const isCurrentUser = currentParticipant.currentUser;
-        if (isCurrentUser) {
+        if (currentParticipant.currentUser) {
             return null;
         }
         const pc = currentParticipant.peerConnection;
@@ -54,32 +59,33 @@ const Participants = (props) => {
                 if (videElement) videElement["srcObject"] = remoteStream;
             };
         }
-
         return (
             <Participant
+                className={colSize}
                 key={curentIndex}
                 currentParticipant={currentParticipant}
                 curentIndex={curentIndex}
                 hideVideo={screenPresenter && screenPresenter !== element}
                 showAvatar={
-                    !currentParticipant.video &&
-                    !currentParticipant.screen &&
-                    currentParticipant.name
+                    !currentParticipant["video"] &&
+                    !currentParticipant["screen"] &&
+                    currentParticipant
                 }
             />
         );
     });
     return (
-        <div
+        <ParticipantsContainer
             // style={{
             // "--grid-size": gridCol,
             // "--grid-col-size": gridColSize,
             // "--grid-row-size": gridRowSize,
             // }}
-            className={"d-flex " + styles.participants}
+            className={"d-flex "}
         >
             {participants}
             <Participant
+                className={colSize}
                 currentParticipant={currentUser}
                 curentIndex={participantKey.length}
                 hideVideo={screenPresenter && !currentUser["screen"]}
@@ -87,7 +93,7 @@ const Participants = (props) => {
                 showAvatar={currentUser && !currentUser["video"] && !currentUser["screen"]}
                 currentUser={true}
             />
-        </div>
+        </ParticipantsContainer>
     );
 };
 

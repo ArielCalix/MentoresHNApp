@@ -1,13 +1,26 @@
 import React, { useRef, useEffect } from "react";
 import MeetingFooter from "./meetingFooter";
 import Participants from "./partipants/participants";
-import styles from './stylesMeeting.module.scss'
 import { connect } from "react-redux";
 import { setMainStream, updateUser } from "../../../store/meetsReducers/actionCreator";
+import styled from "styled-components";
+
+const WrapperContainer = styled.div`
+width: 100%;
+`
+
+const Screen = styled.div`
+width: 100%;
+height: 80vh;
+background: #3c4043;
+`
+
+const Footer = styled.div`
+height: 10vh;
+`
 
 const MainScreen = (props) => {
     const participantRef = useRef(props.participants);
-
     const onMicClick = (micEnabled) => {
         if (props.stream) {
             props.stream.getAudioTracks()[0].enabled = micEnabled;
@@ -38,14 +51,11 @@ const MainScreen = (props) => {
     };
 
     const onScreenShareEnd = async () => {
-        const localStream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
-            video: true,
-        });
+        const localStream = props.stream;
         localStream.getVideoTracks()[0].enabled = Object.values(
             props.currentUser
         )[0]["video"];
-
+        
         updateStream(localStream);
 
         props.updateUser({ screen: false });
@@ -68,19 +78,19 @@ const MainScreen = (props) => {
         props.updateUser({ screen: true });
     };
     return (
-        <div className={styles.wrapper}>
-            <div className={'d-flex ' + styles.mainScreen}>
+        <WrapperContainer>
+            <Screen>
                 <Participants />
-            </div>
+            </Screen>
 
-            <div className={styles.footer}>
+            <Footer>
                 <MeetingFooter
                     onScreenClick={onScreenClick}
                     onMicClick={onMicClick}
                     onVideoClick={onVideoClick}
                 />
-            </div>
-        </div>
+            </Footer>
+        </WrapperContainer>
     );
 };
 

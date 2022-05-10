@@ -15,7 +15,6 @@ let fireDb = fireDbRef;
 let participantRef;
 
 function HomeMeet(props) {
-
     const [isUserSet, setIsUserSet] = useState(false);
     const [userName, setUserName] = useState("")
     const [roomId, setRoomId] = useState("")
@@ -28,6 +27,8 @@ function HomeMeet(props) {
         return localStream;
     };
     useEffect(() => {
+        const urlparams = new URLSearchParams(window.location.search);
+        setRoomId(urlparams.get("id"));
         async function a() {
             const stream = await getUserStream();
             stream.getVideoTracks()[0].enabled = false;
@@ -36,17 +37,20 @@ function HomeMeet(props) {
         a();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const setUserNameToState = (e) => {
+    const submitMeet = (e) => {
+        let connectedRef;
         if (roomId !== "") {
             fireDb = fireDb.child(roomId);
             window.history.replaceState(null, "", "meet?id=" + fireDb.key);
+            console.log(fireDb.key)
+            participantRef = fireDb.child("participants");
+            connectedRef = db.database().ref(".info/connected");
         } else {
             fireDb = fireDb.push();
             window.history.replaceState(null, "", "meet?id=" + fireDb.key);
+            participantRef = fireDb.child(fireDb.key + "/participants");
+            connectedRef = db.database().ref(".info/connected");
         }
-        console.log(fireDb.key)
-        participantRef = fireDb.child("participants");
-        const connectedRef = db.database().ref(".info/connected");
         connectedRef.on("value", (snap) => {
             if (snap.val()) {
                 const defaultPreference = {
@@ -58,7 +62,6 @@ function HomeMeet(props) {
                     userName,
                     preferences: defaultPreference,
                 });
-                console.log(userStatusRef.key)
                 props.setUser({
                     [userStatusRef.key]: { name: userName, ...defaultPreference },
                 });
@@ -73,8 +76,10 @@ function HomeMeet(props) {
     const setRoom = (e: ChangeEvent<HTMLInputElement>) => {
         setRoomId(e.target.value)
     }
-    const userIsSet = !!userName;
-    const isStreamSet = !!props.stream;
+    console.log("Home", userName, props.stream)
+    const userIsSet = (userName) ? true : false;
+    const isStreamSet = (props.stream) ? true : false;
+    console.log("Home2", userIsSet, isStreamSet, participantRef)
 
     useEffect(() => {
         if (isStreamSet && userIsSet && participantRef) {
@@ -112,10 +117,10 @@ function HomeMeet(props) {
                     <input id='userName' className='form-control' onChange={setName} value={userName} type="text" />
                 </div>
                 <div className='mb-3'>
-                    <label className='form-label' data-for='roomId'>Ingrese el id de la meet</label>
+                    <label className='form-label' data-for='roomId'>Ingrese el id de la Sala</label>
                     <input id='roomId' className='form-control' onChange={setRoom} value={roomId} type="text" />
                 </div>
-                <SuccessButton className='mt-' onClick={setUserNameToState} type="button">Ingresar</SuccessButton>
+                <SuccessButton className='mt-' onClick={submitMeet} type="button">Ingresar</SuccessButton>
             </div>
         </div>
         }
