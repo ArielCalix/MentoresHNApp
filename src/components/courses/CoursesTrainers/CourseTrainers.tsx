@@ -5,7 +5,6 @@ const TrainerName = styled.span``;
 const Icon = styled.i``;
 
 const Profile = ({ className = "", ImgSrc, Trainer }) => {
-    console.log(ImgSrc)
     return <div className={`d-flex justify-content-between align-items-center ${className}`}>
         <span>
             <TrainerPhoto src={ImgSrc} className={"img-fluid"} alt="" />
