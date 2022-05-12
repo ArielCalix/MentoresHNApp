@@ -9,11 +9,10 @@ justify-content: center;
 align-items: center;    
 height: 100%;
 video {
-    background-color: #353b48;
+    background-color: black;
     height: 100%;
     width: 100%;
     position: relative;
-    object-fit: cover;
     border-radius: 5px;
 }
 .muted {
@@ -28,6 +27,6 @@ video {
   }
 `
 
-export default function Card (props) {
+export default function Card(props) {
     return <DivCard>{props.children}</DivCard>;
 };

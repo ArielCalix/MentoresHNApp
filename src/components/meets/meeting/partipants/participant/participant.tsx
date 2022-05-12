@@ -10,7 +10,7 @@ height: 100%;
 width: 100%;
 position: relative;
 border-radius: 5px;
-min-height: 200px
+min-height: 200px;
 &.hide {
     display: none;
 }

@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const ParticipantsContainer = styled.div`
 grid-gap: 20px;
-height: 80vh;
+height: 90vh;
 padding: 10px;
 `
 
@@ -30,10 +30,11 @@ const Participants = (props) => {
     //     participantKey.length <= 4
     //         ? participantKey.length
     //         : Math.ceil(participantKey.length / 2);
-
     const screenPresenter = participantKey.find((element) => {
         const currentParticipant = props.participants[element];
-        return currentParticipant.screen;
+        if (currentParticipant.screen === true)
+            return currentParticipant;
+        return false
     });
     colSize = screenPresenter ? "col-12" : colSize
     // if (screenPresenter) {

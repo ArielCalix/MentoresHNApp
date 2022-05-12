@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faMicrophone,
     faVideo,
-    faDesktop,
     faVideoSlash,
     faMicrophoneSlash,
+    faPhoneSlash,
+    faArrowUpFromBracket
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 import styled from 'styled-components';
@@ -31,6 +32,9 @@ align-items: center;
 justify-content: center;
 cursor: pointer;
 &.inactive {
+    background-color: #ea4335;
+}
+&.end-call{
     background-color: #ea4335;
 }
 `
@@ -62,25 +66,17 @@ const MeetingFooter = (props) => {
     };
 
     const onScreenClick = () => {
-        props.onScreenClick(setScreenState);
-    };
-
-    const setScreenState = (isEnabled) => {
+        props.onScreenClick(!streamState.screen);
         setStreamState((currentState) => {
             return {
                 ...currentState,
-                screen: isEnabled,
+                screen: !currentState.screen,
             };
         });
     };
-    // useEffect(() => {
-    //     props.onMicClick(streamState.mic);
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [streamState.mic]);
-    // useEffect(() => {
-    //     props.onVideoClick(streamState.video);
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [streamState.video]);
+    const onCallEnd = () => {
+        props.onCallEnd()
+    }
     return (
         <MeetingFoot>
             <MeetingIcons
@@ -103,9 +99,15 @@ const MeetingFooter = (props) => {
             <MeetingIcons
                 data-tip="Share Screen"
                 onClick={onScreenClick}
-            // disabled={streamState.screen}
             >
-                <FontAwesomeIcon icon={faDesktop} />
+                <FontAwesomeIcon icon={faArrowUpFromBracket} />
+            </MeetingIcons>
+            <MeetingIcons
+                className="end-call"
+                data-tip="End Call"
+                onClick={onCallEnd}
+            >
+                <FontAwesomeIcon icon={faPhoneSlash} />
             </MeetingIcons>
             <ReactTooltip />
         </MeetingFoot>

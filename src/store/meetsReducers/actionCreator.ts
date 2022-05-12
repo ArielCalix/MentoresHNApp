@@ -16,20 +16,24 @@ export const setMainStream = (stream) => {
     };
 };
 
-export const setUser = (user) => {
+export const setUser = (user, meetRef, meetParticipantsRef) => {
     return {
         type: SET_USER,
         payload: {
             currentUser: user,
+            meetRef: meetRef,
+            meetParticipantsRef: meetParticipantsRef
         },
     };
 };
 
-export const addParticipant = (user) => {
+export const addParticipant = (user, meetRef, meetParticipantsRef) => {
     return {
         type: ADD_PARTICIPANT,
         payload: {
             newUser: user,
+            meetRef: meetRef,
+            meetParticipantsRef: meetParticipantsRef
         },
     };
 };
@@ -43,11 +47,13 @@ export const updateUser = (user) => {
     };
 };
 
-export const updateParticipant = (user) => {
+export const updateParticipant = (user, meetRef, meetParticipantsRef) => {
     return {
         type: UPDATE_PARTICIPANT,
         payload: {
             newUser: user,
+            meetRef: meetRef,
+            meetParticipantsRef: meetParticipantsRef
         },
     };
 };

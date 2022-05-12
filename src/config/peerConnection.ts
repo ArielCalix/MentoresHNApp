@@ -1,9 +1,6 @@
-import fireDbRef from "./firebase";
 import { store } from "../index";
 
-const participantRef = fireDbRef.child("participants");
-
-export const updatePreference = (userId, preference) => {
+export const updatePreference = (userId, preference, participantRef) => {
     const currentParticipantRef = participantRef
         .child(userId)
         .child("preferences");
@@ -12,8 +9,8 @@ export const updatePreference = (userId, preference) => {
     });
 };
 
-export const createOffer = async (peerConnection, receiverId, createdID) => {
-    const currentParticipantRef = participantRef.child(receiverId);
+export const createOffer = async (peerConnection, receiverId, createdID, meetParticipantsRef) => {
+    const currentParticipantRef = meetParticipantsRef.child(receiverId);
     peerConnection.onicecandidate = (event) => {
         event.candidate &&
             currentParticipantRef
@@ -33,7 +30,8 @@ export const createOffer = async (peerConnection, receiverId, createdID) => {
     await currentParticipantRef.child("offers").push().set({ offer });
 };
 
-export const initializeListensers = async (userId) => {
+export const initializeListensers = async (userId, meetRef) => {
+    let participantRef = meetRef;
     const currentUserRef = participantRef.child(userId);
 
     currentUserRef.child("offers").on("child_added", async (snapshot) => {
@@ -42,7 +40,7 @@ export const initializeListensers = async (userId) => {
             const pc =
                 store.getState().participants[data.offer.userId].peerConnection;
             await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
-            await createAnswer(data.offer.userId, userId);
+            await createAnswer(data.offer.userId, userId, participantRef);
         }
     });
 
@@ -73,7 +71,7 @@ export const initializeListensers = async (userId) => {
     });
 };
 
-const createAnswer = async (otherUserId, userId) => {
+const createAnswer = async (otherUserId, userId, participantRef) => {
     const pc = store.getState().participants[otherUserId].peerConnection;
     const participantRef1 = participantRef.child(otherUserId);
     pc.onicecandidate = (event) => {

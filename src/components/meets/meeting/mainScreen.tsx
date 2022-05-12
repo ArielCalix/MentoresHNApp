@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import MeetingFooter from "./meetingFooter";
 import Participants from "./partipants/participants";
 import { connect } from "react-redux";
-import { setMainStream, updateUser } from "../../../store/meetsReducers/actionCreator";
+import { removeParticipant, setMainStream, updateUser } from "../../../store/meetsReducers/actionCreator";
 import styled from "styled-components";
 
 const WrapperContainer = styled.div`
@@ -11,7 +11,7 @@ width: 100%;
 
 const Screen = styled.div`
 width: 100%;
-height: 80vh;
+height: 90vh;
 background: #3c4043;
 `
 
@@ -55,7 +55,7 @@ const MainScreen = (props) => {
         localStream.getVideoTracks()[0].enabled = Object.values(
             props.currentUser
         )[0]["video"];
-        
+
         updateStream(localStream);
 
         props.updateUser({ screen: false });
@@ -77,6 +77,15 @@ const MainScreen = (props) => {
 
         props.updateUser({ screen: true });
     };
+    const onCallEnd = () => {
+        let meetParticipantsRef = props.meetParticipantsRef;
+        const currentId = Object.keys(props.currentUser)[0];
+        meetParticipantsRef.child(currentId).remove(() => {
+            props.removeParticipant(currentId);
+            window.history.replaceState(null, "", "");
+            window.location.href = "/";
+        })
+    }
     return (
         <WrapperContainer>
             <Screen>
@@ -88,6 +97,7 @@ const MainScreen = (props) => {
                     onScreenClick={onScreenClick}
                     onMicClick={onMicClick}
                     onVideoClick={onVideoClick}
+                    onCallEnd={onCallEnd}
                 />
             </Footer>
         </WrapperContainer>
@@ -99,6 +109,7 @@ const mapStateToProps = (state) => {
         stream: state.mainStream,
         participants: state.participants,
         currentUser: state.currentUser,
+        meetParticipantsRef: state.meetParticipantsRef
     };
 };
 
@@ -106,6 +117,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setMainStream: (stream) => dispatch(setMainStream(stream)),
         updateUser: (user) => dispatch(updateUser(user)),
+        removeParticipant: (userId) => dispatch(removeParticipant(userId))
     };
 };
 

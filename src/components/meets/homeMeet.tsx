@@ -8,11 +8,10 @@ import {
 } from '../../store/meetsReducers/actionCreator';
 import { connect } from 'react-redux'
 import fireDbRef, { db } from '../../config/firebase';
-// import HomeVideoMeet from './homeVideoMeet';
 import MainScreen from "./meeting/mainScreen";
 import { SuccessButton } from '../shared/buttons/Button';
-let fireDb = fireDbRef;
-let participantRef;
+let meetRef = fireDbRef;
+let meetParticipantsRef;
 
 function HomeMeet(props) {
     const [isUserSet, setIsUserSet] = useState(false);
@@ -31,7 +30,7 @@ function HomeMeet(props) {
         setRoomId(urlparams.get("id"));
         async function a() {
             const stream = await getUserStream();
-            stream.getVideoTracks()[0].enabled = false;
+            stream.getVideoTracks()[0].enabled = true;
             props.setMainStream(stream);
         }
         a();
@@ -40,15 +39,14 @@ function HomeMeet(props) {
     const submitMeet = (e) => {
         let connectedRef;
         if (roomId !== "") {
-            fireDb = fireDb.child(roomId);
-            window.history.replaceState(null, "", "meet?id=" + fireDb.key);
-            console.log(fireDb.key)
-            participantRef = fireDb.child("participants");
+            meetRef = meetRef.child(roomId);
+            window.history.replaceState(null, "", "meet?id=" + meetRef.key);
+            meetParticipantsRef = meetRef.child("participants");
             connectedRef = db.database().ref(".info/connected");
         } else {
-            fireDb = fireDb.push();
-            window.history.replaceState(null, "", "meet?id=" + fireDb.key);
-            participantRef = fireDb.child(fireDb.key + "/participants");
+            meetRef = meetRef.push();
+            window.history.replaceState(null, "", "meet?id=" + meetRef.key);
+            meetParticipantsRef = meetRef.child("participants");
             connectedRef = db.database().ref(".info/connected");
         }
         connectedRef.on("value", (snap) => {
@@ -58,17 +56,18 @@ function HomeMeet(props) {
                     video: false,
                     screen: false,
                 };
-                const userStatusRef = participantRef.push({
+                const userStatusRef = meetParticipantsRef.push({
                     userName,
                     preferences: defaultPreference,
                 });
                 props.setUser({
                     [userStatusRef.key]: { name: userName, ...defaultPreference },
-                });
+                }, meetRef, meetParticipantsRef);
                 userStatusRef.onDisconnect().remove();
             }
         });
         setIsUserSet(true)
+        props.onClick();
     }
     const setName = (e: ChangeEvent<HTMLInputElement>) => {
         setUserName(e.target.value)
@@ -76,15 +75,13 @@ function HomeMeet(props) {
     const setRoom = (e: ChangeEvent<HTMLInputElement>) => {
         setRoomId(e.target.value)
     }
-    console.log("Home", userName, props.stream)
     const userIsSet = (userName) ? true : false;
     const isStreamSet = (props.stream) ? true : false;
-    console.log("Home2", userIsSet, isStreamSet, participantRef)
 
     useEffect(() => {
-        if (isStreamSet && userIsSet && participantRef) {
-            participantRef.on("child_added", (snap) => {
-                const preferenceUpdateEvent = participantRef
+        if (isStreamSet && userIsSet && meetRef) {
+            meetParticipantsRef.on("child_added", (snap) => {
+                const preferenceUpdateEvent = meetParticipantsRef
                     .child(snap.key)
                     .child("preferences");
                 preferenceUpdateEvent.on("child_changed", (preferenceSnap) => {
@@ -92,7 +89,7 @@ function HomeMeet(props) {
                         [snap.key]: {
                             [preferenceSnap.key]: preferenceSnap.val(),
                         },
-                    });
+                    }, meetRef, meetParticipantsRef);
                 });
                 const { userName: name, preferences = {} } = snap.val();
                 props.addParticipant({
@@ -100,9 +97,9 @@ function HomeMeet(props) {
                         name,
                         ...preferences,
                     },
-                });
+                }, meetRef, meetParticipantsRef);
             });
-            participantRef.on("child_removed", (snap) => {
+            meetParticipantsRef.on("child_removed", (snap) => {
                 props.removeParticipant(snap.key);
             });
         }
@@ -131,19 +128,21 @@ const mapStateToProps = (state) => {
     return {
         stream: state.mainStream,
         user: state.currentUser,
+        meetRef: state.meetRef,
+        meetParticipantsRef: state.meetParticipantRef
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         setMainStream: (stream) => dispatch(setMainStream(stream)),
-        addParticipant: (user) => dispatch(addParticipant(user)),
-        setUser: (user) => dispatch(setUser(user)),
+        addParticipant: (user, meetRef, meetParticipantsRef) => dispatch(addParticipant(user, meetRef, meetParticipantsRef)),
+        setUser: (user, meetRef, meetParticipantsRef) => dispatch(setUser(user, meetRef, meetParticipantsRef)),
         removeParticipant: (userId) => dispatch(removeParticipant(userId)),
-        updateParticipant: (user) => dispatch(updateParticipant(user)),
+        updateParticipant: (user, meetRef, meetParticipantsRef) => dispatch(updateParticipant(user, meetRef, meetParticipantsRef)),
     };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeMeet)
 
-export { fireDb }
+// export { fireDb }

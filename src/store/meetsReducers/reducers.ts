@@ -17,6 +17,8 @@ let defaultUserState = {
     mainStream: null,
     participants: {},
     currentUser: null,
+    meetRef: {},
+    meetParticipantsRef: {}
 };
 
 const servers = {
@@ -45,29 +47,30 @@ export const userReducer = (state = defaultUserState, action) => {
         return state;
     } else if (action.type === ADD_PARTICIPANT) {
         let payload = action.payload;
+        let meetParticipantsRef = payload.meetParticipantsRef
         const currentUserId = Object.keys(state.currentUser)[0];
         const newUserId = Object.keys(payload.newUser)[0];
         if (state.mainStream && currentUserId !== newUserId) {
             payload.newUser = addConnection(
                 payload.newUser,
                 state.currentUser,
-                state.mainStream
+                state.mainStream,
+                meetParticipantsRef
             );
         }
-
         if (currentUserId === newUserId)
             payload.newUser[newUserId].currentUser = true;
         payload.newUser[newUserId].avatarColor = generateColor();
         let participants = { ...state.participants, ...payload.newUser };
-        state = { ...state, participants };
+        state = { ...state, participants, meetParticipantsRef: meetParticipantsRef, meetRef: payload.meetRef };
         return state;
     } else if (action.type === SET_USER) {
         let payload = action.payload;
         let participants = { ...state.participants };
         const userId = Object.keys(payload.currentUser)[0];
         payload.currentUser[userId].avatarColor = generateColor();
-        initializeListensers(userId);
-        state = { ...state, currentUser: { ...payload.currentUser }, participants };
+        initializeListensers(userId, payload.meetParticipantsRef);
+        state = { ...state, currentUser: { ...payload.currentUser }, participants, meetParticipantsRef: payload.meetParticipantsRef, meetRef: payload.meetRef };
         return state;
     } else if (action.type === REMOVE_PARTICIPANT) {
         let payload = action.payload;
@@ -78,7 +81,7 @@ export const userReducer = (state = defaultUserState, action) => {
     } else if (action.type === UPDATE_USER) {
         let payload = action.payload;
         const userId = Object.keys(state.currentUser)[0];
-        updatePreference(userId, payload.currentUser);
+        updatePreference(userId, payload.currentUser, state.meetParticipantsRef);
         state.currentUser[userId] = {
             ...state.currentUser[userId],
             ...payload.currentUser,
@@ -86,24 +89,24 @@ export const userReducer = (state = defaultUserState, action) => {
         state = {
             ...state,
             currentUser: { ...state.currentUser },
+            meetParticipantsRef: state.meetParticipantsRef
         };
         return state;
     } else if (action.type === UPDATE_PARTICIPANT) {
         let payload = action.payload;
         const newUserId = Object.keys(payload.newUser)[0];
-
         payload.newUser[newUserId] = {
             ...state.participants[newUserId],
             ...payload.newUser[newUserId],
         };
         let participants = { ...state.participants, ...payload.newUser };
-        state = { ...state, participants };
+        state = { ...state, participants, meetParticipantsRef: payload.meetParticipantsRef };
         return state;
     }
     return state;
 };
 
-const addConnection = (newUser, currentUser, stream) => {
+const addConnection = (newUser, currentUser, stream, meetParticipantsRef) => {
     const peerConnection = new RTCPeerConnection(servers);
     stream.getTracks().forEach((track) => {
         peerConnection.addTrack(track, stream);
@@ -117,6 +120,6 @@ const addConnection = (newUser, currentUser, stream) => {
 
     newUser[newUserId].peerConnection = peerConnection;
     if (offerIds[0] !== currentUserId)
-        createOffer(peerConnection, offerIds[0], offerIds[1]);
+        createOffer(peerConnection, offerIds[0], offerIds[1], meetParticipantsRef);
     return newUser;
 };
