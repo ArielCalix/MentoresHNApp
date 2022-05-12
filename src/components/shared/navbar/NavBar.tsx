@@ -57,14 +57,14 @@ img {
 
 export default function Navigation() {
     return <div className="container d-flex align-item-center">
-        <Header1><a href="/index.html">Mentores HN</a></Header1>
+        <Header1><a href="/DashBoard">Mentores HN</a></Header1>
         <NavBar className="navbar order-last order-lg-0">
             <UnorderedList>
                 <ListItem>
-                    <LinkItem to="/">Inicio</LinkItem>
+                    <LinkItem to="/DashBoard">Dashboard</LinkItem>
                 </ListItem>
                 <ListItem>
-                    <LinkItem to="/Meet">Reunirse</LinkItem>
+                    <LinkItem to="/Meet">Reunirse Ahora</LinkItem>
                 </ListItem>
                 <ListItem>
                     <LinkItem to="/TrainersProfile">Perfil de Entrenador</LinkItem>

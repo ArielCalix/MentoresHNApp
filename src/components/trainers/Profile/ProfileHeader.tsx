@@ -141,7 +141,7 @@ const ProfileNavigation = ({ Sections }) => {
     })
     return <Navigation id="navbar" className="nav-menu navbar">
         <UnorderedList>
-            <li><a href="../index.html" className="nav-link scrollto" ><i className="bx bx-home"></i> <span>Inicio</span></a></li>
+            <li><a href="/" className="nav-link scrollto" ><i className="bx bx-home"></i> <span>Inicio</span></a></li>
             {mappedLi}
         </UnorderedList>
     </Navigation>
@@ -163,13 +163,12 @@ export const ProfileHeader = (props) => {
         }
     }
     return <Contenedor>
-
         <i onClick={updateStateToggle} className="bi bi-list mobile-nav-toggle d-xl-none"></i>
         <Header id="header" className={mobileToggleState}>
             <div className="d-flex flex-column">
                 <Profile className="profile">
                     <Photo src={TrainerData.TrainerPicture} alt={TrainerData.TrainerName} className="img-fluid rounded-circle" />
-                    <Header1 className="text-light"><a href="index.html">{TrainerData.TrainerName}</a></Header1>
+                    <Header1 className="text-light"><a href="/">{TrainerData.TrainerName}</a></Header1>
                     <SocialLinks className="social-links mt-3 text-center">
                         {anchors}
                     </SocialLinks>

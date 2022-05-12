@@ -26,8 +26,9 @@ function HomeMeet(props) {
         return localStream;
     };
     useEffect(() => {
-        const urlparams = new URLSearchParams(window.location.search);
-        setRoomId(urlparams.get("id"));
+        const urlParams = new URLSearchParams(window.location.search);
+        setRoomId(urlParams.get("id"));
+        setUserName(urlParams.get("userName"))
         async function a() {
             const stream = await getUserStream();
             stream.getVideoTracks()[0].enabled = true;
@@ -36,7 +37,7 @@ function HomeMeet(props) {
         a();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const submitMeet = (e) => {
+    const submitMeet = () => {
         let connectedRef;
         if (roomId !== "") {
             meetRef = meetRef.child(roomId);
@@ -75,11 +76,10 @@ function HomeMeet(props) {
     const setRoom = (e: ChangeEvent<HTMLInputElement>) => {
         setRoomId(e.target.value)
     }
-    const userIsSet = (userName) ? true : false;
     const isStreamSet = (props.stream) ? true : false;
 
     useEffect(() => {
-        if (isStreamSet && userIsSet && meetRef) {
+        if (isStreamSet && userName !== "" && meetParticipantsRef) {
             meetParticipantsRef.on("child_added", (snap) => {
                 const preferenceUpdateEvent = meetParticipantsRef
                     .child(snap.key)
@@ -102,6 +102,10 @@ function HomeMeet(props) {
             meetParticipantsRef.on("child_removed", (snap) => {
                 props.removeParticipant(snap.key);
             });
+        }
+        if (userName !== "" && roomId !== "") {
+            setTimeout(submitMeet, 500)
+            console.log("set timer")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isStreamSet, isUserSet]);
