@@ -156,7 +156,6 @@ export const ProfileHeader = (props) => {
         </Anchor>
     })
     const updateStateToggle = () => {
-        console.log(mobileToggleState)
         if (mobileToggleState === '') {
             setMobileToggleState('show');
         } else {
