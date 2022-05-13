@@ -28,7 +28,9 @@ function HomeMeet(props) {
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         setRoomId(urlParams.get("id"));
-        setUserName(urlParams.get("userName"))
+        if (urlParams.get("userName")) {
+            setUserName(urlParams.get("userName"))
+        }
         async function a() {
             const stream = await getUserStream();
             stream.getVideoTracks()[0].enabled = true;
@@ -105,7 +107,6 @@ function HomeMeet(props) {
         }
         if (userName !== "" && roomId !== "") {
             setTimeout(submitMeet, 500)
-            console.log("set timer")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isStreamSet, isUserSet]);
