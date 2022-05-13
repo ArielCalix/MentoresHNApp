@@ -16,15 +16,13 @@ import { Theme } from './Theme/Pallete';
 export const store = createStore(userReducer, devToolsEnhancer({ name: "mentoresHN" }));
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={Theme}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 
