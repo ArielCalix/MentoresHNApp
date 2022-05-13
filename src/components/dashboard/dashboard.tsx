@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays, faInbox, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import NextMeetsTable from './nextMeetsTable';
 import ReactTooltip from 'react-tooltip';
+import CalendarMeets from '../calendar/calendar';
 
 
 const Container = styled.div`
@@ -12,7 +13,8 @@ const Container = styled.div`
 const BoardContainer = styled.div`
 `
 
-const NextMeetsContainer = styled.div`
+const DataContainer = styled.div`
+margin: 0em 0em 0em 2em;
 `
 
 const DashBoardButton = styled.div`
@@ -27,21 +29,32 @@ color: ${props => props.theme.textColor};
 `
 
 export default function DashBoard() {
-    return <Container className='container w-100 mt-5 '>
-        <BoardContainer className='row'>
-            <DashBoardButton data-tip="Bandeja de Entrada" className='btn mx-1 col text-center'>
+    const [route, setRoute] = useState("calendar");
+    const changeRoute = (routeName) => {
+        setRoute(routeName)
+    }
+    return <Container className='d-flex flex-row container mt-3'>
+        <BoardContainer className='d-flex flex-column w-25'>
+            <DashBoardButton onClick={() => changeRoute("mail")} data-tip="Bandeja de Entrada" className='btn my-1 col text-center'>
                 <FontAwesomeIcon icon={faInbox} />
             </DashBoardButton>
-            <DashBoardButton data-tip="Calendario" className='btn mx-1 col text-center'>
+            <DashBoardButton onClick={() => changeRoute("calendar")} data-tip="Calendario" className='btn my-1 col text-center'>
                 <FontAwesomeIcon icon={faCalendarDays} />
             </DashBoardButton>
-            <DashBoardButton data-tip="Reuniones" className='btn mx-1 col text-center'>
+            <DashBoardButton onClick={() => changeRoute("nextMeets")} data-tip="Reuniones" className='btn my-1 col text-center'>
                 <FontAwesomeIcon icon={faFolderOpen} />
             </DashBoardButton>
         </BoardContainer>
-        <NextMeetsContainer className='container w-100 mt-5'>
-            <NextMeetsTable></NextMeetsTable>
-        </NextMeetsContainer>
+        {
+            (route === "mail") ? <DataContainer className='container w-75 mt-3' data-aos="flip-left">
+                mail
+            </DataContainer> :
+                (route === "calendar") ? <DataContainer className='container w-75 mt-3' data-aos="flip-up">
+                    <CalendarMeets />
+                </DataContainer> : <DataContainer className='container w-75 mt-3' data-aos="flip-right">
+                    <NextMeetsTable></NextMeetsTable>
+                </DataContainer>
+        }
         <ReactTooltip />
     </Container>
 
