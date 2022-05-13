@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     const urlparams = new URLSearchParams(window.location.search);
     const roomId = urlparams.get("id");
-    console.log(roomId)
     if (roomId) { resolver.pathname = '/Meet' }
     else { resolver.pathname = '/DashBoard' }
   }, [resolver])
