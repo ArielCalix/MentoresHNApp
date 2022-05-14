@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
-
+import { Link } from 'react-router-dom';
 const TableContainer = styled.div`
 `
 
@@ -10,7 +10,7 @@ const Table = styled.table`
 
 `
 
-const MeetLink = styled.a`
+const MeetLink = styled(Link)`
 color: ${props => props.theme.textColorDark};
 &:hover {
     color: ${props => props.theme.darkAccent};
@@ -40,9 +40,9 @@ const data = [
 ]
 
 export default function NextMeetsTable() {
-    const onClickLink = (LinkTo) => {
-        window.location.href = LinkTo;
-    }
+    // const onClickLink = (LinkTo) => {
+    //     window.location.href = LinkTo;
+    // }
     return <TableContainer>
         <Table className='table table-striped table-hover'>
             <thead>
@@ -61,7 +61,7 @@ export default function NextMeetsTable() {
                         <td className='col-3'>{item.Clase}</td>
                         <td className='col-4'>{item.Mentor}</td>
                         <td className='col-3'>{item.Hora}</td>
-                        <td className='col-1 text-center'><MeetLink href="#h" onClick={() => onClickLink(item.Enlace)}><FontAwesomeIcon icon={faUsers} /></MeetLink></td>
+                        <td className='col-1 text-center'><MeetLink to={item.Enlace}><FontAwesomeIcon icon={faUsers} /></MeetLink></td>
                     </tr>
                 })
                 }

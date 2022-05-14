@@ -13,49 +13,23 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 // require('globalize/lib/cultures/globalize.culture.es');
 //TODO: Refactorizar el componente y terminar configuracion de calendario.
 const lang = {
-    en: null,
-    'en-GB': null,
     es: {
-        week: 'Semana',
+        week: 'Semanal',
         work_week: 'Semana de trabajo',
         day: 'Día',
         month: 'Mes',
-        previous: 'Atrás',
-        next: 'Después',
+        previous: 'Anterior',
+        next: 'Siguiente',
         today: 'Hoy',
-        agenda: 'El Diario',
+        agenda: 'Agenda Diaria',
 
         showMore: (total) => `+${total} más`,
-    },
-    fr: {
-        week: 'La semaine',
-        work_week: 'Semaine de travail',
-        day: 'Jour',
-        month: 'Mois',
-        previous: 'Antérieur',
-        next: 'Prochain',
-        today: `Aujourd'hui`,
-        agenda: 'Ordre du jour',
-
-        showMore: (total) => `+${total} plus`,
-    },
-    'ar-AE': {
-        week: 'أسبوع',
-        work_week: 'أسبوع العمل',
-        day: 'يوم',
-        month: 'شهر',
-        previous: 'سابق',
-        next: 'التالي',
-        today: 'اليوم',
-        agenda: 'جدول أعمال',
-
-        showMore: (total) => `+${total} إضافي`,
     },
 }
 
 const CalendarContainer = styled.div`
 font-family: "Roboto", san-serif;
-button { display: none; }
+.hide-button { display: none; }
 .rbc-toolbar {
     background-color: ${props => props.theme.mainBrand};
     .rbc-btn-group > button {
@@ -144,7 +118,7 @@ export default function CalendarMeets() {
         setEvents(["undefined"])
         setCulture("undefined")
     }
-    const { defaultDate, messages } = useMemo(
+    const { messages } = useMemo(
         () => ({
             defaultDate: new Date(2015, 3, 1),
             messages: lang[culture],
@@ -152,7 +126,6 @@ export default function CalendarMeets() {
     )
     return <CalendarContainer>
         <Calendar
-            defaultDate={defaultDate}
             culture={es}
             events={events}
             localizer={localizer}
@@ -163,6 +136,6 @@ export default function CalendarMeets() {
             style={{ height: '78vh' }}
             messages={messages}
         />
-        <button onClick={setData}></button>
+        <button className='hide-button' onClick={setData}></button>
     </CalendarContainer>
 }
