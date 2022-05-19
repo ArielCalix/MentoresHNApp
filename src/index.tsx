@@ -5,24 +5,28 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom"; //react router provider
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { userReducer } from './store/meetsReducers/reducers';
+import { createStore, combineReducers } from 'redux';
+
+import { } from 'redux';
+// reducers
+import { meetReducer } from './store/meetsReducers/reducers';
+import { loginReducer } from './store/login/reducers';
 
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './Theme/Pallete';
 
-
-export const store = createStore(userReducer, devToolsEnhancer({ name: "mentoresHN" }));
+const reducers = combineReducers({ meetInfo: meetReducer, userInfo: loginReducer });
+export const store = createStore(reducers, (process.env.NODE_ENV === "development") ? devToolsEnhancer({ name: "mentoresHN" }) : null);
 
 ReactDOM.render(
-    <Provider store={store}>
-      <ThemeProvider theme={Theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>,
+  <Provider store={store}>
+    <ThemeProvider theme={Theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
+  </Provider>,
   document.getElementById('root')
 );
 

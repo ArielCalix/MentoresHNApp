@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -18,8 +19,8 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 10px 0 10px 30px;
+text-align: center;
 font-family: "Poppins", sans-serif;
-font-size: 15px;
 font-weight: 500;
 color: ${props => props.theme.textColorDark};
 white-space: nowrap;
@@ -55,21 +56,40 @@ img {
 }
 `
 
-export default function Navigation() {
-    return <div className="container d-flex align-item-center">
+const NavigationContainer = styled.div`
+height: 9vh;
+margin-left: 5%
+`
+
+export default function Navigation({ isLogged }) {
+    return <NavigationContainer className="container d-flex align-item-center">
         <Header1><a href="/DashBoard">Mentores HN</a></Header1>
         <NavBar className="navbar order-last order-lg-0">
             <UnorderedList>
-                <ListItem>
-                    <LinkItem to="/DashBoard">Dashboard</LinkItem>
-                </ListItem>
-                <ListItem>
-                    <LinkItem to="/Meet">Reunirse Ahora</LinkItem>
-                </ListItem>
-                <ListItem>
-                    <LinkItem to="/TrainersProfile">Perfil de Entrenador</LinkItem>
-                </ListItem>
+                {(isLogged) ? <Fragment>
+                    <ListItem>
+                        <LinkItem className={`link`} to="/DashBoard">Dashboard</LinkItem>
+                    </ListItem>
+                    <ListItem>
+                        <LinkItem className={`link`} to="/Meet">Reunirse Ahora</LinkItem>
+                    </ListItem>
+                    <ListItem>
+                        <LinkItem className={`link`} to="/TrainersProfile">Perfil de Entrenador</LinkItem>
+                    </ListItem>
+                </Fragment>
+                    : <Fragment>
+                        <ListItem>
+                            <LinkItem className={`link`} to="/">Mentores</LinkItem>
+                        </ListItem>
+                        <ListItem>
+                            <LinkItem className={`link`} to="/Servicios">Clases</LinkItem>
+                        </ListItem>
+                        <ListItem>
+                            <LinkItem className={`link`} to="/SuccessCases">Casos de Exito</LinkItem>
+                        </ListItem>
+                    </Fragment>
+                }
             </UnorderedList>
         </NavBar>
-    </div>
+    </NavigationContainer>
 }
