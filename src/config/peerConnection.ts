@@ -38,7 +38,7 @@ export const initializeListensers = async (userId, meetRef) => {
         const data = snapshot.val();
         if (data?.offer) {
             const pc =
-                store.getState().participants[data.offer.userId].peerConnection;
+                store.getState().meetInfo.participants[data.offer.userId].peerConnection;
             await pc.setRemoteDescription(new RTCSessionDescription(data.offer));
             await createAnswer(data.offer.userId, userId, participantRef);
         }
@@ -47,7 +47,7 @@ export const initializeListensers = async (userId, meetRef) => {
     currentUserRef.child("offerCandidates").on("child_added", (snapshot) => {
         const data = snapshot.val();
         if (data.userId) {
-            const pc = store.getState().participants[data.userId].peerConnection;
+            const pc = store.getState().meetInfo.participants[data.userId].peerConnection;
             pc.addIceCandidate(new RTCIceCandidate(data));
         }
     });
@@ -56,7 +56,7 @@ export const initializeListensers = async (userId, meetRef) => {
         const data = snapshot.val();
         if (data?.answer) {
             const pc =
-                store.getState().participants[data.answer.userId].peerConnection;
+                store.getState().meetInfo.participants[data.answer.userId].peerConnection;
             const answerDescription = new RTCSessionDescription(data.answer);
             pc.setRemoteDescription(answerDescription);
         }
@@ -65,14 +65,14 @@ export const initializeListensers = async (userId, meetRef) => {
     currentUserRef.child("answerCandidates").on("child_added", (snapshot) => {
         const data = snapshot.val();
         if (data.userId) {
-            const pc = store.getState().participants[data.userId].peerConnection;
+            const pc = store.getState().meetInfo.participants[data.userId].peerConnection;
             pc.addIceCandidate(new RTCIceCandidate(data));
         }
     });
 };
 
 const createAnswer = async (otherUserId, userId, participantRef) => {
-    const pc = store.getState().participants[otherUserId].peerConnection;
+    const pc = store.getState().meetInfo.participants[otherUserId].peerConnection;
     const participantRef1 = participantRef.child(otherUserId);
     pc.onicecandidate = (event) => {
         event.candidate &&

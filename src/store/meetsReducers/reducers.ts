@@ -40,7 +40,7 @@ const servers = {
 const generateColor = () =>
     "#" + Math.floor(Math.random() * 16777215).toString(16);
 
-export const userReducer = (state = defaultUserState, action) => {
+export const meetReducer = (state = defaultUserState, action) => {
     if (action.type === SET_MAIN_STREAM) {
         let payload = action.payload;
         state = { ...state, ...payload };

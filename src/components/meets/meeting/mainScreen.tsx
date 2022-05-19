@@ -83,7 +83,7 @@ const MainScreen = (props) => {
         meetParticipantsRef.child(currentId).remove(() => {
             props.removeParticipant(currentId);
             window.history.replaceState(null, "", "");
-            window.location.href = "/";
+            window.location.href = "/DashBoard";
         })
     }
     return (
@@ -106,10 +106,10 @@ const MainScreen = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        stream: state.mainStream,
-        participants: state.participants,
-        currentUser: state.currentUser,
-        meetParticipantsRef: state.meetParticipantsRef
+        stream: state.meetInfo.mainStream,
+        participants: state.meetInfo.participants,
+        currentUser: state.meetInfo.currentUser,
+        meetParticipantsRef: state.meetInfo.meetParticipantsRef
     };
 };
 

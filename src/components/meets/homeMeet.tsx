@@ -131,10 +131,10 @@ function HomeMeet(props) {
 
 const mapStateToProps = (state) => {
     return {
-        stream: state.mainStream,
-        user: state.currentUser,
-        meetRef: state.meetRef,
-        meetParticipantsRef: state.meetParticipantRef
+        stream: state.meetInfo.mainStream,
+        user: state.meetInfo.currentUser,
+        meetRef: state.meetInfo.meetRef,
+        meetParticipantsRef: state.meetInfo.meetParticipantRef
     };
 }
 

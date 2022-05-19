@@ -100,9 +100,9 @@ const Participants = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        participants: state.participants,
-        currentUser: state.currentUser,
-        stream: state.mainStream,
+        participants: state.meetInfo.participants,
+        currentUser: state.meetInfo.currentUser,
+        stream: state.meetInfo.mainStream,
     };
 };
 
