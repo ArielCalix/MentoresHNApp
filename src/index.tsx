@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -16,7 +16,7 @@ import { Theme } from './Theme/Pallete';
 export const store = createStore(userReducer, devToolsEnhancer({ name: "mentoresHN" }));
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={Theme}>
         <BrowserRouter>
@@ -24,7 +24,7 @@ ReactDOM.render(
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root')
 );
 
